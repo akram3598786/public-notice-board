@@ -25,28 +25,46 @@ export default function Homepage() {
         let url = "http://localhost:8080/notice/all";
         axios.get(url).
             then((res) => {
-                console.log(res.data)
-                Setallnotices(res.data)}).
+            //    console.log(res.data)
+                Setallnotices(res.data);
+            }).
             catch((err) => {
                 console.log(err);
                 setError(true);
-            }).finally(()=>{
+            }).finally(() => {
                 setloading(false);
             })
     }
 
-    const handleSubmit = () => {  
+    const handleSubmit = () => {
         if (notice.length == 0) alert("Enter any notice !");
         else {
+            let d = new Date();
+            let d_arry = d.toString().split(" ");
+            let day = d_arry[2];
+            let month = d_arry[1];
+            let year = d_arry[3];
+
+            let hr = d.getHours();
+            let timeSide = hr > 12 ? "PM" : "AM";
+            let minutus = d.getMinutes();
+            let hours = hr % 12 || 12;
+            let curDate_nd_Time = day + "/" + month + "/" + year + " " + hours + ":" + minutus + " " + timeSide;
+
             let payload = {
-                noticeText : notice,
-                user : location.state.user
+                noticeText: notice,
+                user: location.state.user,
+                date: curDate_nd_Time
             }
+
             let url = "http://localhost:8080/notice/create";
             axios.post(url, payload).
-            then((res)=>{
-                if(res.status === 201) getAllNotices() ;
-            }).catch((err)=>console.log(err));
+                then((res) => {
+                    if (res.status === 201) {
+                        setnotice("")
+                        getAllNotices();
+                    };
+                }).catch((err) => console.log(err));
         }
     }
 
@@ -69,18 +87,18 @@ export default function Homepage() {
                 <h4>All Notices</h4>
                 {
                     loading ? <h1>Loading...</h1> :
-                        error ? <h1 style={{ color: 'red' }}>No Notice exist yet or Something Went Wrong</h1> :     
-                          <>
-                            {allnotices.map((notice)=>{
-                               return <div key={notice._id} className={styles.noticeCard}>
-                               <h4>{notice.noticeText}</h4>
-                               <div>
-                                   <p>{notice.user}</p>
-                                   <p>{notice.createdAt}</p>
-                               </div>
-                           </div> 
-                            })}
-                          </>
+                        error ? <h1 style={{ color: 'red' }}>No Notice exist yet or Something Went Wrong</h1> :
+                            <>
+                                {allnotices.map((notice) => {
+                                    return <div key={notice._id} className={styles.noticeCard}>
+                                        <h4>{notice.noticeText}</h4>
+                                        <div>
+                                            <p>{notice.user}</p>
+                                            <p>{notice.date}</p>
+                                        </div>
+                                    </div>
+                                })}
+                            </>
                 }
 
             </div>
