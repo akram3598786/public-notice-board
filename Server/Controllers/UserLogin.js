@@ -8,6 +8,7 @@ async function Login(req, res){
     try{
        const userData = req.body;
        const userExist = await UserModel.find({username : userData.username});
+       
        if(userExist.length==0){
          await UserModel.create(userData);
        }

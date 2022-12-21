@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema(
                   message: "Usernames must be only alphanumeric characters."
               },
             },
-        notes : [String]
+        notices : [String]
     }, {
     versionKey: false,
     timestamps: true

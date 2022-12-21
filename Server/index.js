@@ -3,14 +3,14 @@ const express = require('express');
 const ConnectDB = require('./Config/ConnectDB');
 const cors = require("cors");
 const AuthRouter = require('./Controllers/UserLogin');
-const NoteRouter = require('./Controllers/Notes');
+const NoticeRouter = require('./Controllers/Notices');
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 app.use("/auth", AuthRouter);
-app.use("/note",NoteRouter);
+app.use("/notice",NoticeRouter);
 
 // const somple=(req,res)=>{
 //     res.send("Working fine")
