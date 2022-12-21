@@ -1,0 +1,8 @@
+
+.NanDiv{
+    background-color: brown;
+    padding: 8px 0px;
+}
+.NanDiv > button{
+    cursor: pointer;
+}

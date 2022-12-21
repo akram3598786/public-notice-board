@@ -1,0 +1,26 @@
+
+.mainDiv > h3{
+  text-decoration: underline;
+}
+.inputSection {
+    /* background-color: gray; */
+}
+.inputSection > input {
+  width: 280px;
+  height: 35px;
+}
+
+.inputSection > button{
+    background-color: black;
+    color: white;
+    width: 70px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.inputSection > button:hover{
+    background-color: rgb(66, 59, 59);
+}
+
+.noticesDiv{
+
+}

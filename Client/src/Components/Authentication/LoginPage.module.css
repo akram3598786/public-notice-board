@@ -1,0 +1,23 @@
+
+.mainDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+}
+.UsernameInput{
+    width: 200px;
+    height: 37px;
+    border-radius: 8px;
+}
+.loginBtn{
+    background-color: black;
+    color: white;
+    width: 70px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.loginBtn:hover{
+    background-color: rgb(66, 59, 59);
+}
