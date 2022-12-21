@@ -11,10 +11,11 @@ async function Login(req, res){
        if(userExist.length==0){
          await UserModel.create(userData);
        }
-       res.status(201).send({message : `${userExist[0].username} logged in`,userExist})
+       let user = await UserModel.find({username : userData.username});
+       res.status(201).send({message : `${user[0].username} logged in`,user});
     }
     catch(err){
-        res.status(500).send(err.message)
+        res.status(500).send(err.message);
     }
 }
 
