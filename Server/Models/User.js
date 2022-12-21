@@ -9,10 +9,15 @@ const UserSchema = new mongoose.Schema(
              trim : true,
              minLength: [2,'Username is too short!'],
              maxLength: 12,
+            //   unique : true,
              validate: {
-                validator: /^[0-9a-zA-Z]+$/, 
-                message: "Usernames must be only alphanumeric characters."
-            },
+                  validator: function (v){
+                     return /^[0-9a-zA-Z]+$/.test(v);
+                  },
+                  message: "Usernames must be only alphanumeric characters."
+              },
+             notes : [String]
+            
             }
     }, {
     versionKey: false,
