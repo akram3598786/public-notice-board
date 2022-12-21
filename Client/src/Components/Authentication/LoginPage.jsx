@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,8 +13,18 @@ export default function Login(){
     const handleClick=()=>{
       if(Username.length == 0) alert("Enter username");
       else{
-        loginHandler(true);
-        navigate("/",{state:{user : Username}});
+        let payload ={
+          username : Username
+        }
+        let url = "http://localhost:8080/auth/login";
+        axios.post(url,payload).
+        then((res)=>{
+          if(res.status === 201){
+           loginHandler(true);
+           navigate("/",{state:{user : Username}});
+          }
+        }).
+        catch((err)=>console.log(err));
       }
     }
 
