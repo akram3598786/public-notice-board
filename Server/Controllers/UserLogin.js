@@ -8,9 +8,9 @@ async function Login(req, res){
     try{
        const userData = req.body;
        const userExist = await UserModel.find({username : userData.username});
-       
+
        if(userExist.length==0){
-         await UserModel.create(userData);
+        let created = await UserModel.create(userData);
        }
        let user = await UserModel.find({username : userData.username});
        res.status(201).send({message : `${user[0].username} logged in`,user});

@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const noticeSchema = new mongoose.Schema(
  {
    noticeText : {type : String},
-   user : String
+   user : String,
+   date : String
  },{
     versionKey: false,
     timestamps: true

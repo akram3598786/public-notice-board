@@ -4,7 +4,7 @@ const ConnectDB = require('./Config/ConnectDB');
 const cors = require("cors");
 const AuthRouter = require('./Controllers/UserLogin');
 const NoticeRouter = require('./Controllers/Notices');
-
+require('dotenv').config();
 const app = express();
 
 app.use(express.json());
