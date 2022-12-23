@@ -20,9 +20,10 @@ export default function Homepage() {
     const checkAuth = () => {
         if (!isAuth) navigate("/login", { state: { message: 'User not logged in !' } })
     }
-
+    
     const getAllNotices = () => {
-        let url = "http://localhost:8080/notice/all";
+        // let url = "http://localhost:8080/notice/all";
+        let url = "https://public-notice-opa.onrender.com/notice/all";
         axios.get(url).
             then((res) => {
             //    console.log(res.data)
@@ -44,7 +45,6 @@ export default function Homepage() {
             let day = d_arry[2];
             let month = d_arry[1];
             let year = d_arry[3];
-
             let hr = d.getHours();
             let timeSide = hr > 12 ? "PM" : "AM";
             let minutus = d.getMinutes();
@@ -57,7 +57,8 @@ export default function Homepage() {
                 date: curDate_nd_Time
             }
 
-            let url = "http://localhost:8080/notice/create";
+            // let url = "http://localhost:8080/notice/create";
+            let url = "https://public-notice-opa.onrender.com/notice/create";
             axios.post(url, payload).
                 then((res) => {
                     if (res.status === 201) {
@@ -80,6 +81,7 @@ export default function Homepage() {
             <div className={styles.inputSection}>
                 <h5>Submit a notice :</h5>
                 <textarea type="text" value={notice} onChange={(e) => setnotice(e.target.value)} maxLength="100" className={styles.noticeInput} /> <br />
+                <p style={{ color: 'red',fontSize:'12px',margin :'0px' }}>Only 100 Characters</p>
                 <button onClick={handleSubmit} className={styles.submitBtn}>Submit</button>
             </div>
             <hr />
@@ -87,7 +89,7 @@ export default function Homepage() {
                 <h4>All Notices</h4>
                 {
                     loading ? <h1>Loading...</h1> :
-                        error ? <h1 style={{ color: 'red' }}>No Notice exist yet or Something Went Wrong</h1> :
+                        error ? <h1 style={{ color: 'red' }}>No notice exist yet or Something went wrong</h1> :
                             <>
                                 {allnotices.map((notice) => {
                                     return <div key={notice._id} className={styles.noticeCard}>
@@ -100,7 +102,6 @@ export default function Homepage() {
                                 })}
                             </>
                 }
-
             </div>
         </div>
     );

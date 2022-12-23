@@ -16,7 +16,8 @@ export default function Login(){
         let payload ={
           username : Username
         }
-        let url = "http://localhost:8080/auth/login";
+        // let url = "http://localhost:8080/auth/login";
+         let url = "https://public-notice-opa.onrender.com/auth/login";
         axios.post(url,payload).
         then((res)=>{
           if(res.status === 201){
@@ -24,7 +25,10 @@ export default function Login(){
            navigate("/",{state:{user : Username}});
           }
         }).
-        catch((err)=>console.log(err));
+        catch((err)=>{
+          console.log(err);
+          const msg = err.response.data.split(":")[2];
+          alert(msg)});
       }
     }
 
